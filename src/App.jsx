@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { PRODUCTS } from './data/storeData';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -13,8 +13,10 @@ import CartDrawer from './components/CartDrawer';
 import ProductModal from './components/ProductModal';
 import SearchModal from './components/SearchModal';
 import InfoModal from './components/InfoModal';
+import LoadingScreen from './components/LoadingScreen';
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState('new-in');
   const [cartItems, setCartItems] = useState(() => {
     try {
@@ -141,8 +143,13 @@ export default function App() {
     setCartItems((prev) => prev.filter((i) => !(i.id === productId && i.size === size)));
   };
 
+  const handleFinishLoading = useCallback(() => {
+    setIsLoading(false);
+  }, []);
+
   return (
     <div id="top" className="min-h-screen flex flex-col bg-[#FBF7F4] text-[#231D18]">
+      <LoadingScreen isVisible={isLoading} onFinish={handleFinishLoading} />
       <Header
         cartCount={cartCount}
         wishlistCount={wishlistIds.length}
