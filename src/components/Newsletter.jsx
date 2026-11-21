@@ -27,10 +27,10 @@ export default function Newsletter() {
             </div>
             <div>
               <h2 className="font-serif font-normal text-[#1E1813] text-[24px] sm:text-[28px] lg:text-[36px] leading-tight">
-                Join ÉLANORA
+                Join Alankrita
               </h2>
               <p className="mt-1.5 text-[13px] lg:text-[16px] text-[#52483F] leading-relaxed max-w-[420px] lg:max-w-[520px]">
-                Subscribe for early access to new arrivals, exclusive offers, and style inspiration.
+                Subscribe for early access to new festive drops, custom pre-bookings, and seasonal edits for women &amp; kids.
               </p>
             </div>
           </div>
@@ -40,7 +40,7 @@ export default function Newsletter() {
             {status === 'subscribed' ? (
               <div className="bg-[#FFFCF9] border border-[#D8CEC3] px-5 py-4 flex items-center gap-2.5 text-[13px] lg:text-[15px] text-[#1E1813]">
                 <Check className="w-4 h-4 lg:w-5 lg:h-5 text-[#4C6B4A] shrink-0" />
-                <span>Welcome to ÉLANORA. Check your inbox for 10% off your first order.</span>
+                <span>Welcome to Alankrita. You&apos;re on our list for upcoming festive drops and custom pre-books.</span>
               </div>
             ) : (
               <form onSubmit={handleSubmit} noValidate className="flex flex-col sm:flex-row">

@@ -1,8 +1,14 @@
-import { FOOTER_COLUMNS } from '../data/storeData';
+import { BRAND, FOOTER_COLUMNS } from '../data/storeData';
 
 function PaymentBadges() {
   return (
     <div className="flex flex-wrap items-center gap-1.5" aria-label="Accepted payment methods">
+      <span className="inline-flex items-center justify-center h-6 px-2 rounded-[3px] bg-white border border-[#E4DDD4] text-[10px] font-bold tracking-tight text-[#1E1813]">
+        UPI
+      </span>
+      <span className="inline-flex items-center justify-center h-6 px-2 rounded-[3px] bg-white border border-[#E4DDD4] text-[10px] font-semibold tracking-tight text-[#3C4043]">
+        GPay
+      </span>
       <span className="inline-flex items-center justify-center h-6 px-2 rounded-[3px] bg-white border border-[#E4DDD4] text-[10px] font-bold tracking-tight text-[#1A1F71]">
         VISA
       </span>
@@ -15,14 +21,8 @@ function PaymentBadges() {
           <circle cx="18" cy="8" r="6" fill="#F79E1B" fillOpacity="0.88" />
         </svg>
       </span>
-      <span className="inline-flex items-center justify-center h-6 px-2 rounded-[3px] bg-white border border-[#E4DDD4] text-[9px] font-bold tracking-tight text-[#003087]">
-        Pay<span className="text-[#0079C1]">Pal</span>
-      </span>
-      <span className="inline-flex items-center justify-center h-6 px-2 rounded-[3px] bg-white border border-[#E4DDD4] text-[10px] font-semibold tracking-tight text-[#1E1813]">
-         Pay
-      </span>
-      <span className="inline-flex items-center justify-center h-6 px-2 rounded-[3px] bg-[#5A31F4] text-[9px] font-bold tracking-tight text-white">
-        shop
+      <span className="inline-flex items-center justify-center h-6 px-2 rounded-[3px] bg-[#1F6E4A] text-[9px] font-semibold tracking-tight text-white">
+        WhatsApp Order
       </span>
     </div>
   );
@@ -49,32 +49,54 @@ export default function Footer({ onFilterSelect, onOpenInfoModal }) {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="font-serif text-[22px] lg:text-[28px] tracking-[0.06em] text-[#1E1813] inline-block"
+              className="inline-flex items-center gap-2.5"
             >
-              ÉLANORA
+              <img
+                src={BRAND.logo}
+                alt="Alankrita monogram"
+                referrerPolicy="no-referrer"
+                className="w-8 h-8 lg:w-9 lg:h-9 rounded-full object-cover border border-[#D9C7A3]"
+              />
+              <span className="font-serif text-[22px] lg:text-[28px] tracking-[0.06em] text-[#1E1813]">
+                {BRAND.name}
+              </span>
             </a>
-            <p className="mt-3 text-[12px] sm:text-[13px] lg:text-[15px] text-[#5E544C] leading-[1.6] max-w-[260px] lg:max-w-[320px]">
-              Timeless fashion for the modern woman. Effortless style, every day.
+            <p className="mt-3 text-[12px] sm:text-[13px] lg:text-[15px] text-[#5E544C] leading-[1.6] max-w-[280px] lg:max-w-[330px]">
+              Custom-tailored ethnic, bridal, and everyday wear for women and kids. Designed in {BRAND.location}.
+            </p>
+            <p className="mt-2 text-[12px] lg:text-[13px] text-[#6F645B]">
+              WhatsApp: {BRAND.whatsappDisplay} · {BRAND.instagramHandle}
             </p>
 
-            {/* Social Icons */}
+            {/* Social Links */}
             <div className="mt-5 lg:mt-6 flex items-center gap-4 text-[#1E1813]">
-              <button
-                type="button"
-                onClick={() => onOpenInfoModal('social-instagram')}
-                aria-label="ÉLANORA on Instagram"
-                className="hover:opacity-65 transition-opacity cursor-pointer"
+              <a
+                href={BRAND.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Alankrita on Instagram"
+                className="hover:opacity-65 transition-opacity"
               >
                 <svg className="w-4 h-4 lg:w-5 lg:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                   <rect x="2" y="2" width="20" height="20" rx="5" />
                   <circle cx="12" cy="12" r="4" />
                   <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
                 </svg>
+              </a>
+              <button
+                type="button"
+                onClick={() => onOpenInfoModal('contact')}
+                aria-label="Alankrita on WhatsApp"
+                className="hover:opacity-65 transition-opacity cursor-pointer"
+              >
+                <svg className="w-4 h-4 lg:w-5 lg:h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                </svg>
               </button>
               <button
                 type="button"
                 onClick={() => onOpenInfoModal('social-facebook')}
-                aria-label="ÉLANORA on Facebook"
+                aria-label="Alankrita on Facebook"
                 className="hover:opacity-65 transition-opacity cursor-pointer"
               >
                 <svg className="w-4 h-4 lg:w-5 lg:h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -83,22 +105,12 @@ export default function Footer({ onFilterSelect, onOpenInfoModal }) {
               </button>
               <button
                 type="button"
-                onClick={() => onOpenInfoModal('social-pinterest')}
-                aria-label="ÉLANORA on Pinterest"
+                onClick={() => onOpenInfoModal('social-youtube')}
+                aria-label="Alankrita on YouTube"
                 className="hover:opacity-65 transition-opacity cursor-pointer"
               >
                 <svg className="w-4 h-4 lg:w-5 lg:h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.477 2 2 6.477 2 12c0 4.237 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.181-.78 1.172-4.97 1.172-4.97s-.299-.6-.299-1.486c0-1.39.806-2.428 1.81-2.428.852 0 1.264.64 1.264 1.408 0 .858-.546 2.14-.828 3.33-.236.995.5 1.807 1.48 1.807 1.778 0 3.144-1.874 3.144-4.58 0-2.393-1.72-4.068-4.176-4.068-2.845 0-4.516 2.135-4.516 4.34 0 .859.331 1.781.745 2.281a.3.3 0 01.069.288l-.278 1.133c-.044.183-.145.223-.335.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.965-.525-2.291-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.523 0 10-4.477 10-10S17.523 2 12 2z" />
-                </svg>
-              </button>
-              <button
-                type="button"
-                onClick={() => onOpenInfoModal('social-tiktok')}
-                aria-label="ÉLANORA on TikTok"
-                className="hover:opacity-65 transition-opacity cursor-pointer"
-              >
-                <svg className="w-4 h-4 lg:w-5 lg:h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.74a4.85 4.85 0 01-1.01-.05z" />
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                 </svg>
               </button>
             </div>
@@ -130,7 +142,7 @@ export default function Footer({ onFilterSelect, onOpenInfoModal }) {
         {/* Bottom Copyright & Payment Icons */}
         <div className="mt-12 pt-6 border-t border-[#EAE2D9] flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[11px] lg:text-[13px] text-[#6F645B]">
-            © 2026 ÉLANORA. All Rights Reserved.
+            © 2026 Alankrita Women&apos;s &amp; Kids&apos; Boutique, Kochi. All Rights Reserved.
           </p>
           <PaymentBadges />
         </div>

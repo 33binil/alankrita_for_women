@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { Search, User, ShoppingBag, ChevronDown, Menu, X } from 'lucide-react';
+import { BRAND, CATEGORIES } from '../data/storeData';
 
 export default function Header({
   cartCount,
@@ -31,21 +32,16 @@ export default function Header({
   };
 
   const shopItems = [
-    { label: 'All Pieces', value: 'all' },
-    { label: 'Dresses', value: 'dresses' },
-    { label: 'Tops', value: 'tops' },
-    { label: 'Bottoms', value: 'bottoms' },
-    { label: 'Blazers', value: 'blazers' },
-    { label: 'Bags & Leather', value: 'bags' },
-    { label: 'Accessories', value: 'accessories' },
-    { label: 'Shoes', value: 'shoes' },
+    { label: 'All Collections', value: 'all' },
+    ...CATEGORIES.map((cat) => ({ label: cat.label, value: cat.id })),
   ];
 
   const collectionItems = [
-    { label: 'New Arrivals Drop', value: 'new-in' },
-    { label: 'Summer Essentials', value: 'summer' },
-    { label: 'Accessory Edit', value: 'accessories' },
-    { label: 'Archive Sale (Up to 30% Off)', value: 'sale' },
+    { label: 'New Arrivals', value: 'new-in' },
+    { label: 'Bridal & Festive Wear', value: 'festive' },
+    { label: 'Daily & Ethnic Kurtis', value: 'kurtis' },
+    { label: 'Kids Wear & Pattu Pavada', value: 'kids-wear' },
+    { label: 'Festive Offers', value: 'sale' },
   ];
 
   return (
@@ -54,12 +50,12 @@ export default function Header({
       <div className="bg-[#EFEAE6] text-[#3D352E] border-b border-[#E5DDD5]">
         <div className="w-full px-4 sm:px-6 lg:px-6 h-8 lg:h-10 flex items-center justify-between text-[11px] lg:text-[13px] tracking-[0.01em]">
           <p className="truncate">
-            <span>Free Shipping on Orders Over $99</span>
+            <span>Custom Tailoring for Women &amp; Kids</span>
             <span className="mx-2.5 text-[#9B8F84]" aria-hidden="true">
               |
             </span>
-            <span className="hidden sm:inline">Easy Returns within 30 Days</span>
-            <span className="sm:hidden">30-Day Returns</span>
+            <span className="hidden sm:inline">Free Pan-India Shipping Over ₹2,999 · Worldwide Delivery</span>
+            <span className="sm:hidden">Free Shipping Over ₹2,999</span>
           </p>
           <div className="hidden sm:flex items-center gap-6 shrink-0">
             <button
@@ -71,10 +67,10 @@ export default function Header({
             </button>
             <button
               type="button"
-              onClick={() => onOpenInfoModal('help')}
+              onClick={() => onOpenInfoModal('contact')}
               className="hover:text-[#1E1813] transition-colors cursor-pointer whitespace-nowrap"
             >
-              Help Center
+              WhatsApp Care
             </button>
           </div>
         </div>
@@ -101,16 +97,24 @@ export default function Header({
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 onSelectFilter('new-in', false);
               }}
-              className="font-serif text-[23px] sm:text-[26px] lg:text-[32px] tracking-[0.06em] font-normal text-[#1E1813] whitespace-nowrap shrink-0"
+              className="inline-flex items-center gap-2.5 whitespace-nowrap shrink-0"
             >
-              Alankrita
+              <img
+                src={BRAND.logo}
+                alt="Alankrita monogram"
+                referrerPolicy="no-referrer"
+                className="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 rounded-full object-cover border border-[#D9C7A3] shrink-0"
+              />
+              <span className="font-serif text-[23px] sm:text-[26px] lg:text-[32px] tracking-[0.06em] font-normal text-[#1E1813]">
+                {BRAND.name}
+              </span>
             </a>
           </div>
 
           {/* Desktop Center Links */}
           <nav
             aria-label="Primary"
-            className="hidden lg:flex items-center gap-9 xl:gap-11 text-[15px] font-normal text-[#3A322C]"
+            className="hidden lg:flex items-center gap-8 xl:gap-10 text-[15px] font-normal text-[#3A322C]"
           >
             <button
               type="button"
@@ -130,7 +134,7 @@ export default function Header({
                 className="inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 cursor-pointer hover:text-[#1E1813] transition-colors"
                 aria-expanded={openDropdown === 'shop'}
               >
-                <span>Shop</span>
+                <span>Categories</span>
                 <ChevronDown
                   className={`w-4 h-4 transition-transform duration-150 ${
                     openDropdown === 'shop' ? 'rotate-180' : ''
@@ -138,7 +142,7 @@ export default function Header({
                 />
               </button>
               {openDropdown === 'shop' && (
-                <div className="absolute left-0 top-full mt-3 w-56 bg-[#FFFCF9] border border-[#E7DFD6] shadow-lg py-2 z-50">
+                <div className="absolute left-0 top-full mt-3 w-60 bg-[#FFFCF9] border border-[#E7DFD6] shadow-lg py-2 z-50 max-h-[70vh] overflow-y-auto">
                   {shopItems.map((item) => (
                     <button
                       key={item.value}
@@ -188,39 +192,30 @@ export default function Header({
 
             <button
               type="button"
-              onClick={() => handleNavClick('dresses')}
+              onClick={() => handleNavClick('kurtis')}
               className={`whitespace-nowrap shrink-0 cursor-pointer transition-colors hover:text-[#1E1813] ${
-                activeFilter === 'dresses' ? 'text-[#1E1813] font-medium' : ''
+                activeFilter === 'kurtis' ? 'text-[#1E1813] font-medium' : ''
               }`}
             >
-              Dresses
+              Kurtis
             </button>
             <button
               type="button"
-              onClick={() => handleNavClick('tops')}
+              onClick={() => handleNavClick('festive')}
               className={`whitespace-nowrap shrink-0 cursor-pointer transition-colors hover:text-[#1E1813] ${
-                activeFilter === 'tops' ? 'text-[#1E1813] font-medium' : ''
+                activeFilter === 'festive' ? 'text-[#1E1813] font-medium' : ''
               }`}
             >
-              Tops
+              Bridal &amp; Festive
             </button>
             <button
               type="button"
-              onClick={() => handleNavClick('bottoms')}
+              onClick={() => handleNavClick('kids-wear')}
               className={`whitespace-nowrap shrink-0 cursor-pointer transition-colors hover:text-[#1E1813] ${
-                activeFilter === 'bottoms' ? 'text-[#1E1813] font-medium' : ''
+                activeFilter === 'kids-wear' ? 'text-[#1E1813] font-medium' : ''
               }`}
             >
-              Bottoms
-            </button>
-            <button
-              type="button"
-              onClick={() => handleNavClick('sale')}
-              className={`whitespace-nowrap shrink-0 cursor-pointer transition-colors hover:text-[#1E1813] ${
-                activeFilter === 'sale' ? 'text-[#1E1813] font-medium' : ''
-              }`}
-            >
-              Sale
+              Kids Wear
             </button>
           </nav>
 
@@ -230,7 +225,7 @@ export default function Header({
               type="button"
               onClick={onOpenSearch}
               className="p-2 lg:p-2.5 text-[#1E1813] hover:bg-[#F3ECE5] rounded-full transition-colors cursor-pointer"
-              aria-label="Search catalog"
+              aria-label="Search boutique catalog"
             >
               <Search className="w-[18px] h-[18px] lg:w-[22px] lg:h-[22px]" strokeWidth={1.6} />
             </button>
@@ -238,7 +233,7 @@ export default function Header({
               type="button"
               onClick={() => onOpenInfoModal('account')}
               className="relative p-2 lg:p-2.5 text-[#1E1813] hover:bg-[#F3ECE5] rounded-full transition-colors cursor-pointer"
-              aria-label="Account and saved items"
+              aria-label="Saved items"
             >
               <User className="w-[18px] h-[18px] lg:w-[22px] lg:h-[22px]" strokeWidth={1.6} />
               {wishlistCount > 0 && (
@@ -266,12 +261,12 @@ export default function Header({
               {[
                 { label: 'New In', value: 'new-in' },
                 { label: 'Shop All', value: 'all' },
-                { label: 'Dresses', value: 'dresses' },
-                { label: 'Tops', value: 'tops' },
-                { label: 'Bottoms', value: 'bottoms' },
-                { label: 'Blazers', value: 'blazers' },
-                { label: 'Bags & Accessories', value: 'accessories' },
-                { label: 'Sale', value: 'sale' },
+                { label: 'Wedding Sarees', value: 'wedding-saree' },
+                { label: 'Anarkali & Kurtis', value: 'kurtis' },
+                { label: 'Designer Gowns', value: 'gown' },
+                { label: 'Lehenga & Dhavani', value: 'festive' },
+                { label: 'Kids Wear', value: 'kids-wear' },
+                { label: 'Festive Offers', value: 'sale' },
               ].map((link) => (
                 <button
                   key={link.value}
@@ -302,11 +297,11 @@ export default function Header({
                 type="button"
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  onOpenInfoModal('help');
+                  onOpenInfoModal('contact');
                 }}
                 className="py-1 underline underline-offset-4"
               >
-                Help Center
+                WhatsApp Care
               </button>
             </div>
           </div>

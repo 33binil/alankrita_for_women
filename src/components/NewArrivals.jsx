@@ -1,49 +1,70 @@
 import { Heart } from 'lucide-react';
+import { formatPrice } from '../data/storeData';
 
 const FILTER_HEADERS = {
   'new-in': {
     title: 'New Arrivals',
-    subtitle: 'Fresh styles just in. Be the first to shop our latest drops.',
+    subtitle: 'Fresh boutique pieces just in from our Kochi studio. Ready-to-wear and custom-stitched.',
   },
   all: {
-    title: 'All Pieces',
-    subtitle: 'Timeless everyday essentials crafted in breathable natural fabrics.',
+    title: 'All Collections',
+    subtitle: 'Every signature women\'s and kids\' style at Alankrita—from bridal sarees to daily kurtis.',
   },
-  dresses: {
-    title: 'Dresses',
-    subtitle: 'Fluid silhouettes designed for effortless day-to-evening dressing.',
+  'wedding-saree': {
+    title: 'Wedding Sarees',
+    subtitle: 'Heirloom bridal Kanchipuram silks paired with bespoke hand-embroidered blouses.',
   },
-  tops: {
-    title: 'Tops & Shirts',
-    subtitle: 'Fine ribbed knits and crisp organic poplin tailoring.',
+  anarkali: {
+    title: 'Anarkali',
+    subtitle: 'Graceful hand-embroidered cotton and festive Anarkalis crafted for effortless twirls.',
   },
-  bottoms: {
-    title: 'Bottoms',
-    subtitle: 'High-waisted pleated trousers with graceful drape and clean lines.',
+  aline: {
+    title: 'A-Line Kurtis',
+    subtitle: 'Flattering pleated and yoke-worked A-line silhouettes tailored for everyday elegance.',
   },
-  blazers: {
-    title: 'Blazers',
-    subtitle: 'Relaxed single-breasted tailoring built for modern capsule wardrobes.',
+  gown: {
+    title: 'Designer Gowns',
+    subtitle: 'Floor-length tissue silk and hand-embellished party gowns custom-fitted to you.',
   },
-  bags: {
-    title: 'Bags',
-    subtitle: 'Architectural leather carryalls with understated brushed hardware.',
+  'saree-gown': {
+    title: 'Saree Gowns',
+    subtitle: 'Pre-draped fluid georgette saree gowns blending traditional grace with modern ease.',
   },
-  accessories: {
-    title: 'Accessories',
-    subtitle: 'Refined finishing touches in warm gold vermeil and supple leather.',
+  lehenga: {
+    title: 'Lehenga Sets',
+    subtitle: 'Hand-beaded bridal and reception lehengas customizable in your preferred shade.',
   },
-  shoes: {
-    title: 'Shoes',
-    subtitle: 'Minimalist Italian leather footwear with cushioned all-day comfort.',
+  'crop-top-skirt': {
+    title: 'Crop Top & Skirt',
+    subtitle: 'Contemporary festive two-piece ensembles with artisan embroidery and flared skirts.',
   },
-  summer: {
-    title: 'Summer Essentials',
-    subtitle: 'Light, effortless silhouettes curated for warm-weather ease. Up to 30% off.',
+  dhavani: {
+    title: 'Dhavani Sets',
+    subtitle: 'Traditional South Indian half-sarees with hand-embroidered blouses and zari trims.',
+  },
+  'side-slit-kurti': {
+    title: 'Side Slit Kurtis',
+    subtitle: 'Straight-cut georgette side-slit kurtis finished with antique-gold beadwork.',
+  },
+  'umbrella-kurti': {
+    title: 'Umbrella Kurtis',
+    subtitle: 'Full-flared umbrella kurtis paired with scalloped dupattas for festive comfort.',
+  },
+  'kids-wear': {
+    title: 'Kids Wear',
+    subtitle: 'Kerala kasavu pattu pavadas and festive frocks soft-lined and stitched for little ones.',
+  },
+  festive: {
+    title: 'Bridal & Festive',
+    subtitle: 'Curated wedding sarees, designer gowns, saree gowns, lehengas, and dhavani sets.',
+  },
+  kurtis: {
+    title: 'Kurtis & Anarkalis',
+    subtitle: 'Signature A-line, Anarkali, side-slit, and umbrella kurtis tailored in Kochi.',
   },
   sale: {
-    title: 'Seasonal Sale',
-    subtitle: 'Selected archival favorites now up to 30% off for a limited time.',
+    title: 'Festive Offers',
+    subtitle: 'Selected Alankrita favorites at special studio pricing for a limited period.',
   },
 };
 
@@ -65,7 +86,7 @@ export default function NewArrivals({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-start">
           {/* Left Editorial Intro Column */}
           <div className="lg:col-span-3 pt-1 lg:pr-4">
-            <h2 className="font-serif font-normal text-[#1E1813] text-[30px] sm:text-[36px] lg:text-[44px] xl:text-[48px] leading-[1.12] tracking-[-0.01em]">
+            <h2 className="font-serif font-normal text-[#1E1813] text-[30px] sm:text-[36px] lg:text-[44px] xl:text-[48px] leading-[1.12] tracking-[-0.01em] text-balance">
               {headerInfo.title}
             </h2>
             <p className="mt-3 lg:mt-4 text-[13px] sm:text-[14px] lg:text-[16px] text-[#5E544C] leading-[1.6] max-w-[300px] lg:max-w-[340px]">
@@ -91,7 +112,7 @@ export default function NewArrivals({
             </div>
           </div>
 
-          {/* Right 4-Column Product Grid */}
+          {/* Right Product Grid */}
           <div className="lg:col-span-9">
             {products.length === 0 ? (
               <div className="bg-[#F4EEE7] p-12 text-center">
@@ -138,7 +159,7 @@ export default function NewArrivals({
                               ? `Remove ${product.name} from saved items`
                               : `Save ${product.name} to wishlist`
                           }
-                          className="absolute top-2.5 right-2.5 w-9 h-9 lg:w-10 lg:h-10 flex items-center justify-center rounded-full bg-transparent hover:bg-[#FFFCF9]/70 transition-colors cursor-pointer"
+                          className="absolute top-2.5 right-2.5 w-9 h-9 lg:w-10 lg:h-10 flex items-center justify-center rounded-full bg-[#FFFCF9]/75 hover:bg-[#FFFCF9] transition-colors cursor-pointer"
                         >
                           <Heart
                             className={`w-[17px] h-[17px] lg:w-[20px] lg:h-[20px] transition-colors ${
@@ -174,10 +195,10 @@ export default function NewArrivals({
                           </button>
                         </h3>
                         <div className="mt-1 flex items-center gap-2 text-[13px] lg:text-[15px] tabular-nums">
-                          <span className="text-[#5E544C]">${displayPrice.toFixed(2)}</span>
+                          <span className="text-[#5E544C]">{formatPrice(displayPrice)}</span>
                           {product.salePrice && (
                             <span className="text-[#9E9286] line-through text-[12px] lg:text-[14px]">
-                              ${product.price.toFixed(2)}
+                              {formatPrice(product.price)}
                             </span>
                           )}
                         </div>

@@ -20,7 +20,7 @@ export default function Testimonials() {
     <section aria-label="Customer Reviews" className="bg-[#FBF7F4] py-14 sm:py-18 lg:py-22">
       <div className="w-full px-4 sm:px-6 lg:px-6">
         <h2 className="font-serif font-normal text-center text-[#1E1813] text-[24px] sm:text-[30px] lg:text-[38px] tracking-[-0.01em]">
-          What Our Customers Say
+          Loved by Women &amp; Moms Everywhere
         </h2>
 
         <div className="relative mt-9 sm:mt-12 lg:mt-14 flex items-center">
@@ -54,15 +54,19 @@ export default function Testimonials() {
                 </div>
 
                 <footer className="mt-5 lg:mt-6 flex items-center gap-3">
-                  <img
-                    src={item.avatar}
-                    alt={item.author}
-                    referrerPolicy="no-referrer"
-                    className="w-7 h-7 lg:w-9 lg:h-9 rounded-full object-cover border border-[#E5DDD5]"
-                  />
-                  <cite className="not-italic text-[12px] sm:text-[13px] lg:text-[15px] font-medium text-[#231D18]">
-                    — {item.author}
-                  </cite>
+                  <span
+                    aria-hidden="true"
+                    className="w-8 h-8 lg:w-9 lg:h-9 rounded-full bg-[#EAE1D7] border border-[#DFD3C6] text-[#1E1813] font-serif text-[12px] lg:text-[13px] flex items-center justify-center shrink-0"
+                  >
+                    {item.initials}
+                  </span>
+                  <div className="flex items-center gap-1.5 text-[12px] sm:text-[13px] lg:text-[15px]">
+                    <cite className="not-italic font-medium text-[#231D18]">
+                      {item.author}
+                    </cite>
+                    <span className="text-[#9B8F84]" aria-hidden="true">·</span>
+                    <span className="text-[#6F645B]">{item.location}</span>
+                  </div>
                 </footer>
               </blockquote>
             ))}

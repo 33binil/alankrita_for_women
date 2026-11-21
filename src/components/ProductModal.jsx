@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { X, Heart } from 'lucide-react';
+import { formatPrice } from '../data/storeData';
 
 export default function ProductModal({
   product,
@@ -55,16 +56,16 @@ export default function ProductModal({
         <div className="p-6 sm:p-8 flex flex-col justify-between">
           <div>
             <p className="text-[11px] uppercase tracking-[0.12em] text-[#7B6E63]">
-              ÉLANORA Atelier
+              Alankrita · Kochi Boutique
             </p>
             <h2 className="mt-1.5 font-serif text-[26px] text-[#1E1813] leading-tight">
               {product.name}
             </h2>
             <div className="mt-2 flex items-center gap-2.5 text-[15px] tabular-nums">
-              <span className="font-medium text-[#1E1813]">${displayPrice.toFixed(2)}</span>
+              <span className="font-medium text-[#1E1813]">{formatPrice(displayPrice)}</span>
               {product.salePrice && (
                 <span className="text-[#9E9286] line-through text-[13px]">
-                  ${product.price.toFixed(2)}
+                  {formatPrice(product.price)}
                 </span>
               )}
             </div>
@@ -77,7 +78,7 @@ export default function ProductModal({
             <div className="mt-6">
               <div className="flex items-center justify-between text-[12px]">
                 <span className="font-medium text-[#1E1813]">Select Size</span>
-                <span className="text-[#7B6E63]">True to size</span>
+                <span className="text-[#7B6E63]">Custom fit &amp; colors available</span>
               </div>
               <div className="mt-2.5 flex flex-wrap gap-2">
                 {product.sizes.map((size) => (

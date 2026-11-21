@@ -18,7 +18,7 @@ export default function App() {
   const [activeFilter, setActiveFilter] = useState('new-in');
   const [cartItems, setCartItems] = useState(() => {
     try {
-      const saved = localStorage.getItem('elanora_cart');
+      const saved = localStorage.getItem('alankrita_cart');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -26,7 +26,7 @@ export default function App() {
   });
   const [wishlistIds, setWishlistIds] = useState(() => {
     try {
-      const saved = localStorage.getItem('elanora_wishlist');
+      const saved = localStorage.getItem('alankrita_wishlist');
       return saved ? JSON.parse(saved) : [];
     } catch {
       return [];
@@ -40,7 +40,7 @@ export default function App() {
 
   useEffect(() => {
     try {
-      localStorage.setItem('elanora_cart', JSON.stringify(cartItems));
+      localStorage.setItem('alankrita_cart', JSON.stringify(cartItems));
     } catch {
       // Ignore storage quota errors
     }
@@ -48,7 +48,7 @@ export default function App() {
 
   useEffect(() => {
     try {
-      localStorage.setItem('elanora_wishlist', JSON.stringify(wishlistIds));
+      localStorage.setItem('alankrita_wishlist', JSON.stringify(wishlistIds));
     } catch {
       // Ignore storage quota errors
     }
@@ -61,8 +61,14 @@ export default function App() {
     if (activeFilter === 'all') {
       return PRODUCTS;
     }
-    if (activeFilter === 'sale' || activeFilter === 'summer') {
-      return PRODUCTS.filter((p) => p.onSale || p.category === 'dresses' || p.category === 'tops');
+    if (activeFilter === 'sale') {
+      return PRODUCTS.filter((p) => p.onSale);
+    }
+    if (activeFilter === 'festive') {
+      return PRODUCTS.filter((p) => p.collectionGroup === 'festive');
+    }
+    if (activeFilter === 'kurtis') {
+      return PRODUCTS.filter((p) => p.collectionGroup === 'kurtis');
     }
     return PRODUCTS.filter((p) => p.category === activeFilter);
   }, [activeFilter]);
@@ -115,7 +121,7 @@ export default function App() {
   };
 
   const handleQuickAdd = (product) => {
-    const defaultSize = product.sizes?.includes('M') ? 'M' : product.sizes?.[0] || 'One Size';
+    const defaultSize = product.sizes?.includes('M') ? 'M' : product.sizes?.[0] || 'Custom';
     handleAddToCart(product, defaultSize);
   };
 
@@ -170,8 +176,8 @@ export default function App() {
         />
 
         <PromoBanners
-          onShopSummer={() => handleSelectFilter('summer')}
-          onShopAccessories={() => handleSelectFilter('accessories')}
+          onShopFestive={() => handleSelectFilter('festive')}
+          onShopKids={() => handleSelectFilter('kids-wear')}
         />
 
         <Testimonials />

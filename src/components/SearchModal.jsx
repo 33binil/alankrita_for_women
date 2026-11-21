@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { X, Search } from 'lucide-react';
+import { formatPrice } from '../data/storeData';
 
 export default function SearchModal({ isOpen, products, onClose, onSelectProduct }) {
   const [query, setQuery] = useState('');
@@ -24,7 +25,7 @@ export default function SearchModal({ isOpen, products, onClose, onSelectProduct
       <div
         role="dialog"
         aria-modal="true"
-        aria-label="Search catalog"
+        aria-label="Search boutique catalog"
         className="w-full max-w-2xl bg-[#FFFCF9] border border-[#E7DFD6] shadow-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
@@ -35,7 +36,7 @@ export default function SearchModal({ isOpen, products, onClose, onSelectProduct
             autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search blazers, knitwear, dresses, accessories..."
+            placeholder="Search wedding saree, anarkali, gown, lehenga, dhavani, kids wear..."
             className="flex-1 bg-transparent text-[14px] text-[#1E1813] placeholder:text-[#968A7E] focus:outline-none"
           />
           <button
@@ -50,12 +51,12 @@ export default function SearchModal({ isOpen, products, onClose, onSelectProduct
 
         <div className="p-5 max-h-[65vh] overflow-y-auto">
           <p className="text-[11px] uppercase tracking-[0.12em] text-[#7B6E63] mb-3">
-            {trimmed ? `Results (${matches.length})` : 'Popular Pieces'}
+            {trimmed ? `Results (${matches.length})` : 'Signature Styles'}
           </p>
 
           {matches.length === 0 ? (
             <p className="py-8 text-center text-[13px] text-[#6F645B]">
-              No items found for &ldquo;{query}&rdquo;. Try &ldquo;blazer&rdquo;, &ldquo;shirt&rdquo;, or &ldquo;pants&rdquo;.
+              No outfits found for &ldquo;{query}&rdquo;. Try &ldquo;anarkali&rdquo;, &ldquo;gown&rdquo;, &ldquo;dhavani&rdquo;, or &ldquo;kids&rdquo;.
             </p>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -81,7 +82,7 @@ export default function SearchModal({ isOpen, products, onClose, onSelectProduct
                     {item.name}
                   </p>
                   <p className="text-[12px] text-[#5E544C] tabular-nums">
-                    ${(item.salePrice ?? item.price).toFixed(2)}
+                    {formatPrice(item.salePrice ?? item.price)}
                   </p>
                 </button>
               ))}

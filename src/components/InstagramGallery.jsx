@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { X, Instagram } from 'lucide-react';
-import { INSTAGRAM_POSTS } from '../data/storeData';
+import { X, Instagram, ArrowUpRight } from 'lucide-react';
+import { BRAND, INSTAGRAM_POSTS } from '../data/storeData';
 
 export default function InstagramGallery() {
   const [selectedPost, setSelectedPost] = useState(null);
@@ -8,9 +8,17 @@ export default function InstagramGallery() {
   return (
     <section aria-label="Instagram Lookbook" className="bg-[#FBF7F4] pb-12 sm:pb-16 lg:pb-20">
       <div className="w-full px-4 sm:px-6 lg:px-0">
-        <h2 className="font-serif font-normal text-center text-[#1E1813] text-[22px] sm:text-[28px] lg:text-[34px] tracking-[-0.01em] mb-6 sm:mb-8 lg:mb-10">
-          Follow Us @elanora.style
-        </h2>
+        <div className="text-center mb-6 sm:mb-8 lg:mb-10">
+          <a
+            href={BRAND.instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 font-serif font-normal text-[#1E1813] text-[22px] sm:text-[28px] lg:text-[34px] tracking-[-0.01em] hover:opacity-75 transition-opacity"
+          >
+            <span>Follow Us {BRAND.instagramHandle}</span>
+            <ArrowUpRight className="w-5 h-5 lg:w-6 lg:h-6 text-[#6F645B]" strokeWidth={1.6} />
+          </a>
+        </div>
 
         <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 sm:gap-3 lg:gap-2">
           {INSTAGRAM_POSTS.map((post, index) => (
@@ -27,7 +35,7 @@ export default function InstagramGallery() {
                 src={post.image}
                 alt={post.caption}
                 referrerPolicy="no-referrer"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
               />
               <div className="absolute inset-0 bg-[#1E1813]/0 group-hover:bg-[#1E1813]/25 transition-colors flex items-center justify-center">
                 <Instagram
@@ -63,14 +71,25 @@ export default function InstagramGallery() {
                 src={selectedPost.image}
                 alt={selectedPost.caption}
                 referrerPolicy="no-referrer"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-top"
               />
             </div>
             <div className="p-5">
-              <p className="text-[12px] font-semibold tracking-[0.04em] text-[#6F645B]">
-                {selectedPost.handle}
-              </p>
-              <p className="mt-1.5 text-[14px] text-[#231D18] leading-relaxed">
+              <div className="flex items-center justify-between gap-2">
+                <p className="text-[12px] font-semibold tracking-[0.04em] text-[#6F645B]">
+                  {selectedPost.handle}
+                </p>
+                <a
+                  href={BRAND.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-[11px] font-semibold tracking-[0.08em] uppercase text-[#1E1813] hover:underline underline-offset-4"
+                >
+                  <span>View on Instagram</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
+              <p className="mt-2 text-[14px] text-[#231D18] leading-relaxed">
                 {selectedPost.caption}
               </p>
             </div>
