@@ -3,8 +3,9 @@ import { CATEGORIES } from '../data/storeData';
 export default function CategoryStrip({ activeFilter, onSelectCategory }) {
   return (
     <section
+      id="categories"
       aria-label="Browse by category"
-      className="bg-[#FBF7F4] py-9 sm:py-12 lg:py-14 border-b border-[#EFE8E0]/60"
+      className="bg-[#FBF7F4] py-9 sm:py-12 lg:py-14 border-b border-[#EFE8E0]/60 scroll-mt-[98px] sm:scroll-mt-[106px] lg:scroll-mt-[126px]"
     >
       <div className="w-full px-4 sm:px-6 lg:px-6">
         <div className="flex items-start justify-start xl:justify-between gap-4 sm:gap-5 lg:gap-4 overflow-x-auto no-scrollbar pb-2">
